@@ -17,8 +17,8 @@ Out of scope: routing, auth, editing song data, deleting ratings (not in the API
 
 - **R-TBL-1.** On load, the app fetches `GET /songs?page=1&size=10&sort=title&order=asc` and shows the songs in a table. Title A→Z is the default because id order looks random to a user. The API keeps `id` as its own default, and the UI just asks for `title`.
 - **R-TBL-2. Columns, left to right:**
-  - `title`, `danceability`, `energy`, `acousticness`, `valence`, `tempo`, `duration_ms`, `num_sections`, `num_segments`, `mood`, `rating`, `id`
-  - These are every sortable column the API offers (API R-LIST-4).
+  - `title`, `danceability`, `energy`, `acousticness`, `valence`, `tempo`, `duration_ms`, `num_sections`, `num_segments`, `mood`, `rating`
+  - These are every sortable column the API offers (API R-LIST-4) except `id`. The id is the key in the data and the API and is still used for ratings, but it means nothing to a user, so the table doesn't show it.
 - **R-TBL-3. Pagination.** 10 rows per page. There are Prev/Next controls and a "Page X of Y · N songs" label. Prev is disabled on page 1, and Next on the last page.
 - **R-TBL-4. States.** While a page is loading the previous rows stay visible, marked as loading. A failed fetch shows an error with a Retry button. An empty result shows "No songs".
 
@@ -45,7 +45,7 @@ Out of scope: routing, auth, editing song data, deleting ratings (not in the API
 
 - **R-CSV-1.** A "Download CSV" button saves the rows **currently shown in the table**: the current page in its current sort order.
 - **R-CSV-2. Format:**
-  - The header row uses the column keys from R-TBL-2, in that order.
+  - The header row uses the column keys from R-TBL-2, in that order. Like the table, the CSV has no `id`, so it matches what's on screen. Songs with the same title (the two "Perfect"s) can only be told apart by their values.
   - Null values become empty cells. The "—" is display-only.
   - Fields containing a comma, quote, CR or LF are quoted, with quotes doubled (RFC 4180).
   - Line endings are CRLF, and the file starts with a UTF-8 BOM so Excel shows "Naïve" correctly.

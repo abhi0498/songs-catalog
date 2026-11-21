@@ -54,7 +54,7 @@ frontend/
 
 ```js
 // sort.js
-export const DEFAULT_SORT = { sort: "id", order: "asc" };
+export const DEFAULT_SORT = { sort: "title", order: "asc" };
 export function nextSort(current, column) {
   return current.sort === column
     ? { sort: column, order: current.order === "asc" ? "desc" : "asc" }
