@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchSongs } from "./lib/api.js";
+import { useEffect, useRef, useState } from "react";
+import { fetchSongs, searchSongs } from "./lib/api.js";
 import { csvFilename, downloadCsv, toCsv } from "./lib/csv.js";
 import { DEFAULT_SORT, nextSort } from "./lib/sort.js";
 import Pagination from "./components/Pagination.jsx";
+import SearchPanel from "./components/SearchPanel.jsx";
 import SongTable from "./components/SongTable.jsx";
 
 export default function App() {
@@ -10,6 +11,8 @@ export default function App() {
   const [pageData, setPageData] = useState(null);
   const [status, setStatus] = useState({ state: "loading", error: null });
   const [reload, setReload] = useState(0);
+  const [search, setSearch] = useState({ state: "idle" });
+  const searchSeq = useRef(0); // only the latest search may update the panel
 
   useEffect(() => {
     let ignore = false; // drop responses for queries that are no longer current
@@ -28,11 +31,25 @@ export default function App() {
   const rows = pageData?.items ?? [];
   const onDownload = () => downloadCsv(toCsv(rows), csvFilename(query));
 
+  const onSearch = (text) => {
+    const q = text.trim();
+    const seq = ++searchSeq.current;
+    if (!q) { setSearch({ state: "empty" }); return; }
+    setSearch({ state: "loading", query: q });
+    searchSongs(q).then(
+      (result) => { if (seq === searchSeq.current) setSearch({ state: "done", query: q, result }); },
+      (error) => { if (seq === searchSeq.current) setSearch({ state: "error", query: q, error }); },
+    );
+  };
+  const onClearSearch = () => { searchSeq.current++; setSearch({ state: "idle" }); };
+
   return (
     <main className="app">
       <header className="app-header">
         <h1>Songs</h1>
       </header>
+
+      <SearchPanel search={search} onSearch={onSearch} onClear={onClearSearch} />
 
       <div className="toolbar">
         <button type="button" onClick={onDownload} disabled={rows.length === 0}>
