@@ -11,5 +11,5 @@ export const COLUMNS = [
   { key: "num_segments", label: "Segments", numeric: true },
   { key: "mood", label: "Mood", numeric: true },
   { key: "rating", label: "Rating", numeric: true },
-  { key: "id", label: "ID", numeric: false },
+  // id is left out on purpose: it's the key in the data and API, but meaningless to a user.
 ];

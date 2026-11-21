@@ -5,7 +5,7 @@
 Normalizes `data/songs_part1.json` and `data/songs_part2.json` into a clean
 dataset. Spec: [`specs/data/`](../specs/data/) (requirements, design, tasks).
 
-Requires Python ≥ 3.11, standard library only. Run it from this folder:
+Requires Python ≥ 3.11, standard library only. Run it from this folder with the venv active (setup is in the [root README](../README.md#quick-start)):
 
 ```bash
 python -m pipeline
@@ -35,9 +35,7 @@ names the file and column). Nothing is written in that case.
 FastAPI over `data/normalized/songs.json`, with star ratings in SQLite.
 Spec: [`specs/api/`](../specs/api/). Run it from this folder:
 
-```bash
-pip install "fastapi>=0.110" "uvicorn>=0.29"
-```
+Install with `pip install -e ".[dev]"` inside a venv (see the [root README](../README.md#quick-start)), then:
 
 ```bash
 uvicorn app.main:create_app --factory --reload
@@ -68,6 +66,7 @@ There's no endpoint to delete a rating (see [DECISIONS.md](../DECISIONS.md)).
 ## Tests
 
 ```bash
-pip install pytest httpx   # dev dependencies
 python -m pytest
 ```
+
+Test dependencies come with `pip install -e ".[dev]"`.

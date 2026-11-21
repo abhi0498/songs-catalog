@@ -6,3 +6,5 @@ ratings.db
 ratings.db-*
 node_modules/
 dist/
+*.egg-info/
+.claude/

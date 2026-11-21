@@ -1,6 +1,6 @@
 # Songs take-home
 
-Two messy song exports are normalized into one clean dataset, served by a FastAPI backend, and shown in a React dashboard. Each part was built spec-first: requirements → design → tasks → test-first implementation.
+Two messy song exports are normalized into one clean dataset, served by a FastAPI backend, and shown in a React dashboard. The pipeline (backend/pipeline) merges the files by id and never invents values: anything untrustworthy becomes null with a reason, and the three durations stored in seconds are fixed only because their segment counts confirm it. The API (backend/app) sorts and pages across the whole dataset, has a title search that always returns a list because titles aren't unique, and stores 1-5 star ratings in SQLite. The dashboard (frontend) shows the table, search, ratings, CSV export and a chart of the evidence for the duration fix. Each part was built spec-first (requirements, design, tasks, then test-first code), and the reasoning is in DECISIONS.md.
 
 | Part | Code | Spec | How to run |
 |---|---|---|---|
@@ -12,27 +12,43 @@ The decisions and the reasons behind them are in [DECISIONS.md](DECISIONS.md).
 
 ## Quick start
 
-From `backend/`, regenerate the clean data (the output is already committed in `data/normalized/`):
+You need Python 3.11+ and Node 18+. On macOS the default `python3` may be older, so check with `python3 --version` (Homebrew's `python3.12` works).
+
+Backend, from `backend/`:
 
 ```bash
-python -m pipeline
+python3 -m venv .venv
 ```
 
-From `backend/`, start the API on :8000:
+```bash
+source .venv/bin/activate
+```
+
+```bash
+pip install -e ".[dev]"
+```
 
 ```bash
 uvicorn app.main:create_app --factory --reload
 ```
 
-From `frontend/`, start the dashboard on :5173:
+The API runs on http://localhost:8000 (docs at /docs). The cleaned data is already committed in `data/normalized/`; to regenerate it, run `python -m pipeline` with the venv active.
+
+Frontend, from `frontend/` in a second terminal:
 
 ```bash
-npm install && npm run dev
+npm install
 ```
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173.
 
 ## Tests
 
-From `backend/`:
+From `backend/`, with the venv active:
 
 ```bash
 python -m pytest

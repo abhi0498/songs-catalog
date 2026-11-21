@@ -84,10 +84,10 @@ describe("api client", () => {
 });
 
 describe("columns", () => {
-  it("lists every API sortable column, title first, id last", () => {
+  it("lists the user-facing columns, title first, without the internal id", () => {
     expect(COLUMNS.map((c) => c.key)).toEqual([
       "title", "danceability", "energy", "acousticness", "valence", "tempo",
-      "duration_ms", "num_sections", "num_segments", "mood", "rating", "id",
+      "duration_ms", "num_sections", "num_segments", "mood", "rating",
     ]);
   });
 });
