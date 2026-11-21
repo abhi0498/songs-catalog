@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchSongs, searchSongs } from "./lib/api.js";
+import { fetchAllSongs, fetchSongs, searchSongs } from "./lib/api.js";
 import { csvFilename, downloadCsv, toCsv } from "./lib/csv.js";
 import { DEFAULT_SORT, nextSort } from "./lib/sort.js";
+import DurationChart from "./components/DurationChart.jsx";
 import Pagination from "./components/Pagination.jsx";
 import SearchPanel from "./components/SearchPanel.jsx";
 import SongTable from "./components/SongTable.jsx";
@@ -14,6 +15,16 @@ export default function App() {
   const [reload, setReload] = useState(0);
   const [search, setSearch] = useState({ state: "idle" });
   const searchSeq = useRef(0); // only the latest search may update the panel
+  const [chart, setChart] = useState({ state: "loading", songs: [], error: null });
+
+  useEffect(() => {
+    let ignore = false;
+    fetchAllSongs().then(
+      (data) => { if (!ignore) setChart({ state: "ok", songs: data.items, error: null }); },
+      (error) => { if (!ignore) setChart({ state: "error", songs: [], error }); },
+    );
+    return () => { ignore = true; };
+  }, []);
 
   useEffect(() => {
     let ignore = false; // drop responses for queries that are no longer current
@@ -49,6 +60,7 @@ export default function App() {
     const swap = (items) => items.map((s) => (s.id === updated.id ? updated : s));
     setPageData((d) => (d ? { ...d, items: swap(d.items) } : d));
     setSearch((s) => (s.state === "done" ? { ...s, result: { ...s.result, items: swap(s.result.items) } } : s));
+    setChart((c) => ({ ...c, songs: swap(c.songs) }));
   };
   const renderRating = (song) => <StarRating song={song} onRated={onRated} />;
 
@@ -86,6 +98,13 @@ export default function App() {
           </>
         )}
         {!pageData && loading && <p className="muted">Loading songs…</p>}
+      </section>
+
+      <section className="chart-section" aria-labelledby="chart-heading">
+        <h2 id="chart-heading">Duration vs segments</h2>
+        {chart.state === "loading" && <p className="muted">Loading chart…</p>}
+        {chart.state === "error" && <p role="alert" className="error">Couldn't load chart data: {chart.error.message}</p>}
+        {chart.state === "ok" && <DurationChart songs={chart.songs} />}
       </section>
     </main>
   );
