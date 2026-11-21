@@ -71,4 +71,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         song = one(song_id)
         return with_rating(song, ratings.get(song_id))
 
+    @app.put("/songs/{song_id}/rating", response_model=Song)
+    def rate_song(song_id: str, body: RatingIn):
+        song = one(song_id)               # 404 before anything is stored (R-RATE-3)
+        ratings.set(song_id, body.stars)  # DB errors propagate as 500 (R-RATE-5)
+        return with_rating(song, body.stars)
+
     return app
