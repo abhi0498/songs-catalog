@@ -1,6 +1,6 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import App from "./App.jsx";
 import { installFakeApi, json } from "./test/fakeApi.js";
 
@@ -76,5 +76,45 @@ describe("App table", () => {
     fail = false;
     await user.click(screen.getByRole("button", { name: "Retry" }));
     await waitFor(() => expect(bodyRows()).toHaveLength(10));
+  });
+});
+
+describe("CSV download", () => {
+  it("downloads exactly the rows shown, named by page and sort", async () => {
+    const user = userEvent.setup();
+    installFakeApi();
+    let blob;
+    // jsdom has no object URLs, so define them for this test.
+    const created = vi.fn((b) => { blob = b; return "blob:x"; });
+    URL.createObjectURL = created;
+    URL.revokeObjectURL = vi.fn();
+    const clicks = [];
+    vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(function () { clicks.push(this.download); });
+
+    render(<App />);
+    await waitFor(() => expect(bodyRows()).toHaveLength(10));
+    await user.click(screen.getByRole("button", { name: "Next page" }));
+    await waitFor(() => expect(within(bodyRows()[0]).getByText("Song 11")).toBeInTheDocument());
+    await user.click(screen.getByRole("button", { name: /download csv/i }));
+
+    expect(created).toHaveBeenCalledOnce();
+    expect(clicks).toEqual(["songs-page-2-id-asc.csv"]);
+    const text = await new Promise((resolve) => {   // jsdom's Blob has no .text()
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsText(blob);
+    });
+    expect(blob.type).toBe("text/csv;charset=utf-8");
+    const rows = text.replace(/^﻿/, "").trim().split("\r\n");
+    expect(rows).toHaveLength(11);
+    expect(rows[1].startsWith("Song 11,")).toBe(true);
+    expect(rows[10].startsWith("Song 20,")).toBe(true);
+  });
+
+  it("is disabled when there are no rows", async () => {
+    installFakeApi([]);
+    render(<App />);
+    expect(await screen.findByText("No songs")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /download csv/i })).toBeDisabled();
   });
 });

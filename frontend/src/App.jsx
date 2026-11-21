@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSongs } from "./lib/api.js";
+import { csvFilename, downloadCsv, toCsv } from "./lib/csv.js";
 import { DEFAULT_SORT, nextSort } from "./lib/sort.js";
 import Pagination from "./components/Pagination.jsx";
 import SongTable from "./components/SongTable.jsx";
@@ -24,12 +25,20 @@ export default function App() {
   const onSort = (column) => setQuery({ page: 1, ...nextSort(sortState, column) });
   const onPage = (page) => setQuery((q) => ({ ...q, page }));
   const loading = status.state === "loading";
+  const rows = pageData?.items ?? [];
+  const onDownload = () => downloadCsv(toCsv(rows), csvFilename(query));
 
   return (
     <main className="app">
       <header className="app-header">
         <h1>Songs</h1>
       </header>
+
+      <div className="toolbar">
+        <button type="button" onClick={onDownload} disabled={rows.length === 0}>
+          Download CSV
+        </button>
+      </div>
 
       <section aria-labelledby="table-heading">
         <h2 id="table-heading" className="visually-hidden">All songs</h2>
