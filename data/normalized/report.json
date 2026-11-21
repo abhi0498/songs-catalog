@@ -1,0 +1,61 @@
+{
+  "inputs": [
+    {
+      "file": "songs_part1.json",
+      "sha256": "fced7776e0f4de30bd25041bef84ba60449f8ef62033f67f89e9102f46bdd56b",
+      "rows": 16
+    },
+    {
+      "file": "songs_part2.json",
+      "sha256": "76fbf23c31d9efffe26e5d85d85a51652f718580983d3c24da68c02428f879c0",
+      "rows": 13
+    }
+  ],
+  "band": {
+    "median": 272.832,
+    "low": 136.416,
+    "high": 545.663,
+    "n": 22
+  },
+  "records": 25,
+  "merged": 4,
+  "nulls_by_field_and_reason": {
+    "danceability": {
+      "out_of_range": 1,
+      "source_conflict": 1
+    },
+    "energy": {
+      "missing_absent": 1,
+      "missing_na": 1
+    },
+    "acousticness": {
+      "missing_null": 1,
+      "out_of_range": 1
+    },
+    "valence": {
+      "not_in_source": 12
+    },
+    "tempo": {
+      "out_of_range": 1
+    }
+  },
+  "corrections": 3,
+  "conflicts": 1,
+  "possible_duplicate_pairs": 1,
+  "by_reason": {
+    "coerced_from_string": 2,
+    "missing_absent": 1,
+    "missing_na": 1,
+    "missing_null": 1,
+    "not_in_source": 12,
+    "out_of_range": 3,
+    "possible_duplicate": 2,
+    "source_conflict": 1,
+    "unit_corrected_s_to_ms": 3,
+    "whitespace_normalized": 1
+  },
+  "by_severity": {
+    "info": 17,
+    "warning": 10
+  }
+}

@@ -1,0 +1,441 @@
+[
+  {
+    "id": "093PI3mdUvOSlvMYDwnV1e",
+    "field": "energy",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "2"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "missing_absent",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "093PI3mdUvOSlvMYDwnV1e",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "2"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "0VjIjW4GlUZAMYd2vXMi3b",
+    "field": "tempo",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "8"
+    },
+    "raw_value": 0,
+    "final_value": null,
+    "reason": "out_of_range",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "0VjIjW4GlUZAMYd2vXMi3b",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "8"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "0tgVpDi06FyKpA1z0VMD4v",
+    "field": "record",
+    "source": null,
+    "raw_value": null,
+    "final_value": null,
+    "reason": "possible_duplicate",
+    "severity": "info",
+    "detail": {
+      "other_id": "7dNsHhGeGU5MV01r06O8gK",
+      "tempo_diff_pct": 0.0,
+      "duration_diff_pct": 0.227,
+      "field_diffs": {
+        "danceability": [
+          0.599,
+          0.601
+        ],
+        "energy": [
+          0.448,
+          0.455
+        ],
+        "acousticness": [
+          0.163,
+          0.17
+        ],
+        "valence": [
+          0.61,
+          0.6
+        ],
+        "duration_ms": [
+          263400,
+          264000
+        ],
+        "num_segments": [
+          940,
+          944
+        ]
+      }
+    }
+  },
+  {
+    "id": "1BxfuPKGuaTgP7aM0Bbdwr",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "11"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "1hKdDCpiI9mqz1jVHRKG0E",
+    "field": "acousticness",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "6"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "missing_null",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "1hKdDCpiI9mqz1jVHRKG0E",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "6"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "2QjOHCTQ1Jl3zawyYOpxh6",
+    "field": "duration_ms",
+    "source": {
+      "file": "songs_part2.json",
+      "row": "11"
+    },
+    "raw_value": 356,
+    "final_value": 356000,
+    "reason": "unit_corrected_s_to_ms",
+    "severity": "warning",
+    "detail": {
+      "ms_per_segment": 238.926,
+      "band": [
+        136.416,
+        545.663
+      ],
+      "median": 272.832
+    }
+  },
+  {
+    "id": "2jiI8bNSDu7UxTtDCOqh3L",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "4"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "2klCjJcucgGQysgH170npL",
+    "field": "title",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "1"
+    },
+    "raw_value": " 4 walls  ",
+    "final_value": "4 walls",
+    "reason": "whitespace_normalized",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "2klCjJcucgGQysgH170npL",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "1"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "3AJwUDP919kvQ9QcozQPxg",
+    "field": "energy",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "10"
+    },
+    "raw_value": "N/A",
+    "final_value": null,
+    "reason": "missing_na",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "3AJwUDP919kvQ9QcozQPxg",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "10"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "3JvKfv6T31zO0ini8iNItO",
+    "field": "acousticness",
+    "source": {
+      "file": "songs_part2.json",
+      "row": "7"
+    },
+    "raw_value": -0.05,
+    "final_value": null,
+    "reason": "out_of_range",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "3KkXRkHbMCARz0aVfEt68P",
+    "field": "duration_ms",
+    "source": {
+      "file": "songs_part2.json",
+      "row": "5"
+    },
+    "raw_value": 158,
+    "final_value": 158000,
+    "reason": "unit_corrected_s_to_ms",
+    "severity": "warning",
+    "detail": {
+      "ms_per_segment": 282.143,
+      "band": [
+        136.416,
+        545.663
+      ],
+      "median": 272.832
+    }
+  },
+  {
+    "id": "3n3Ppam7vgaVa1iaRUc9Lp",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "7"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "4VqPOruhp5EdPBeR92t6lQ",
+    "field": "duration_ms",
+    "source": {
+      "file": "songs_part2.json",
+      "row": "9"
+    },
+    "raw_value": 270,
+    "final_value": 270000,
+    "reason": "unit_corrected_s_to_ms",
+    "severity": "warning",
+    "detail": {
+      "ms_per_segment": 267.327,
+      "band": [
+        136.416,
+        545.663
+      ],
+      "median": 272.832
+    }
+  },
+  {
+    "id": "4uLU6hMCjMI75M1A2tKUQC",
+    "field": "danceability",
+    "source": null,
+    "raw_value": [
+      0.727,
+      0.74
+    ],
+    "final_value": null,
+    "reason": "source_conflict",
+    "severity": "warning",
+    "detail": {
+      "values": [
+        {
+          "file": "songs_part1.json",
+          "row": "13",
+          "value": 0.727
+        },
+        {
+          "file": "songs_part2.json",
+          "row": "1",
+          "value": 0.74
+        }
+      ]
+    }
+  },
+  {
+    "id": "5vYA1mW9g2Coh1HUFUSmlb",
+    "field": "danceability",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "0"
+    },
+    "raw_value": "0.521",
+    "final_value": 0.521,
+    "reason": "coerced_from_string",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "5vYA1mW9g2Coh1HUFUSmlb",
+    "field": "tempo",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "0"
+    },
+    "raw_value": "108.73",
+    "final_value": 108.73,
+    "reason": "coerced_from_string",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "5vYA1mW9g2Coh1HUFUSmlb",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "0"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "64yrDBpcdwEdNY9loyEGbX",
+    "field": "danceability",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "3"
+    },
+    "raw_value": 1.42,
+    "final_value": null,
+    "reason": "out_of_range",
+    "severity": "warning",
+    "detail": null
+  },
+  {
+    "id": "64yrDBpcdwEdNY9loyEGbX",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "3"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "6habFhsOp2NvshLv26DqMb",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "9"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  },
+  {
+    "id": "7dNsHhGeGU5MV01r06O8gK",
+    "field": "record",
+    "source": null,
+    "raw_value": null,
+    "final_value": null,
+    "reason": "possible_duplicate",
+    "severity": "info",
+    "detail": {
+      "other_id": "0tgVpDi06FyKpA1z0VMD4v",
+      "tempo_diff_pct": 0.0,
+      "duration_diff_pct": 0.227,
+      "field_diffs": {
+        "danceability": [
+          0.601,
+          0.599
+        ],
+        "energy": [
+          0.455,
+          0.448
+        ],
+        "acousticness": [
+          0.17,
+          0.163
+        ],
+        "valence": [
+          0.6,
+          0.61
+        ],
+        "duration_ms": [
+          264000,
+          263400
+        ],
+        "num_segments": [
+          944,
+          940
+        ]
+      }
+    }
+  },
+  {
+    "id": "7fBv7CLKzipRk6EC6TWHOB",
+    "field": "valence",
+    "source": {
+      "file": "songs_part1.json",
+      "row": "5"
+    },
+    "raw_value": null,
+    "final_value": null,
+    "reason": "not_in_source",
+    "severity": "info",
+    "detail": null
+  }
+]
