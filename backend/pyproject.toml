@@ -1,12 +1,12 @@
 [project]
 name = "vivpro-songs-backend"
 version = "0.1.0"
-description = "Song data normalization pipeline and API"
+description = "Song data normalization pipeline and songs API"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["fastapi>=0.110", "uvicorn>=0.29"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "httpx>=0.27"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
