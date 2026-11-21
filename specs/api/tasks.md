@@ -69,6 +69,6 @@ Implements: [design.md](design.md) and [requirements.md](requirements.md) v2. Ea
 - Traces: R-RATE-1..7, D-API-3.
 
 ### A7 — README & full check
-- `backend/README.md`: an "API" section with how to run (`uvicorn app.main:app --reload`), the endpoint table, the env vars, and the note that you restart after a pipeline run.
+- `backend/README.md`: an "API" section with how to run (`uvicorn app.main:create_app --factory --reload`), the endpoint table, the env vars, and the note that you restart after a pipeline run.
 - Run the full suite, and smoke-test a real `uvicorn` with `curl` on each endpoint.
 - Traces: R-CFG-3, R-VER-1..2.

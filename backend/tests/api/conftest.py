@@ -48,3 +48,30 @@ def songs_file(tmp_path):
     p = tmp_path / "songs.json"
     p.write_text(json.dumps(SMALL, ensure_ascii=False), encoding="utf-8")
     return p
+
+
+@pytest.fixture
+def make_client(tmp_path):
+    """Build a TestClient over a given songs file and a ratings db in tmp_path."""
+    from fastapi.testclient import TestClient
+
+    from app.config import DEFAULT_CORS, Settings
+    from app.main import create_app
+
+    def _make(songs_path, ratings_db=None):
+        settings = Settings(songs_path=songs_path,
+                            ratings_db=ratings_db or tmp_path / "ratings.db",
+                            cors_origins=DEFAULT_CORS)
+        return TestClient(create_app(settings))
+
+    return _make
+
+
+@pytest.fixture
+def client(make_client, songs_file):
+    return make_client(songs_file)
+
+
+@pytest.fixture
+def real_client(make_client):
+    return make_client(REAL_SONGS)

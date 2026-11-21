@@ -34,7 +34,7 @@ backend/
     test_read_endpoints.py test_rating_endpoint.py
 ```
 
-Run it with `uvicorn app.main:app --reload` from `backend/`. A module-level `app = create_app()` reads the settings from the environment. Tests call `create_app(Settings(...))` directly with temporary paths.
+Run it with `uvicorn app.main:create_app --factory --reload` from `backend/`. With no arguments, `create_app()` reads the settings from the environment. There's deliberately **no module-level `app`**: importing `app.main` (for example in tests) would otherwise load the real songs and create `backend/ratings.db` as a side effect. Tests call `create_app(Settings(...))` directly with temporary paths.
 
 ## 3. Config (`config.py`)
 
