@@ -1,5 +1,6 @@
 /** Header-click sort logic (R-SORT-1). Sorting itself is done by the API. */
-export const DEFAULT_SORT = { sort: "id", order: "asc" };
+// Title A→Z reads naturally. Sorting by id looked random to users.
+export const DEFAULT_SORT = { sort: "title", order: "asc" };
 
 export function nextSort(current, column) {
   return current.sort === column

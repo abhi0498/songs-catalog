@@ -20,7 +20,7 @@ Implements: [design.md](design.md). Each task is test-first and one commit, run 
 - `lib/sort.js`, `components/SongTable.jsx`, `Pagination.jsx`, `Cell.jsx` (values only for now). App fetches on load and on query change, ignoring stale responses.
 - **Tests:**
   - `nextSort`: new column → asc, same column toggles, default
-  - App on load requests `page=1&size=10&sort=id&order=asc` and renders 10 rows
+  - App on load requests `page=1&size=10&sort=title&order=asc` and renders 10 rows
   - clicking the Tempo header → `sort=tempo&order=asc`, clicking again → `desc`, `aria-sort` updates
   - from page 2, a sort click → page 1
   - Next/Prev disabled at the ends

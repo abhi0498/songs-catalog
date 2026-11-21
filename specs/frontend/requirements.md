@@ -15,7 +15,7 @@ Out of scope: routing, auth, editing song data, deleting ratings (not in the API
 
 ### Songs table
 
-- **R-TBL-1.** On load, the app fetches `GET /songs?page=1&size=10&sort=id&order=asc` and shows the songs in a table.
+- **R-TBL-1.** On load, the app fetches `GET /songs?page=1&size=10&sort=title&order=asc` and shows the songs in a table. Title A→Z is the default because id order looks random to a user. The API keeps `id` as its own default, and the UI just asks for `title`.
 - **R-TBL-2. Columns, left to right:**
   - `title`, `danceability`, `energy`, `acousticness`, `valence`, `tempo`, `duration_ms`, `num_sections`, `num_segments`, `mood`, `rating`, `id`
   - These are every sortable column the API offers (API R-LIST-4).

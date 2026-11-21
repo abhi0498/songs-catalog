@@ -41,7 +41,7 @@ frontend/
 
 | State | Shape | Notes |
 |---|---|---|
-| `query` | `{page, sort, order}` | Starts as `{1, "id", "asc"}`. Changing it triggers a fetch in `useEffect`. |
+| `query` | `{page, sort, order}` | Starts as `{1, "title", "asc"}`. Changing it triggers a fetch in `useEffect`. |
 | `pageData` | `{items, page, total, total_pages}` or null | The last successful page. It stays visible while the next one loads (R-TBL-4). |
 | `status` | `"loading" \| "ok" \| "error"`, plus `error` | |
 | `search` | `{state: "idle"\|"loading"\|"done"\|"error", query, result, error}` | |

@@ -16,11 +16,13 @@ function bodyRows() {
 }
 
 describe("App table", () => {
-  it("loads page 1, size 10, sorted by id asc", async () => {
+  it("loads page 1, size 10, sorted by title asc", async () => {
     const { calls } = installFakeApi();
     render(<App />);
     await waitFor(() => expect(bodyRows()).toHaveLength(10));
-    expect(songRequests(calls)[0]).toEqual({ page: "1", size: "10", sort: "id", order: "asc" });
+    expect(songRequests(calls)[0]).toEqual({ page: "1", size: "10", sort: "title", order: "asc" });
+    const title = screen.getByRole("button", { name: /^Title/ });
+    expect(title.closest("th")).toHaveAttribute("aria-sort", "ascending");
     expect(screen.getByText(/Page 1 of 3 · 25 songs/)).toBeInTheDocument();
   });
 
@@ -94,11 +96,11 @@ describe("CSV download", () => {
     render(<App />);
     await waitFor(() => expect(bodyRows()).toHaveLength(10));
     await user.click(screen.getByRole("button", { name: "Next page" }));
-    await waitFor(() => expect(within(bodyRows()[0]).getByText("Song 11")).toBeInTheDocument());
+    await waitFor(() => expect(within(bodyRows()[0]).getByText("Song 19")).toBeInTheDocument());
     await user.click(screen.getByRole("button", { name: /download csv/i }));
 
     expect(created).toHaveBeenCalledOnce();
-    expect(clicks).toEqual(["songs-page-2-id-asc.csv"]);
+    expect(clicks).toEqual(["songs-page-2-title-asc.csv"]);
     const text = await new Promise((resolve) => {   // jsdom's Blob has no .text()
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
@@ -107,8 +109,9 @@ describe("CSV download", () => {
     expect(blob.type).toBe("text/csv;charset=utf-8");
     const rows = text.replace(/^﻿/, "").trim().split("\r\n");
     expect(rows).toHaveLength(11);
-    expect(rows[1].startsWith("Song 11,")).toBe(true);
-    expect(rows[10].startsWith("Song 20,")).toBe(true);
+    // The fake API compares titles as plain strings, so page 2 runs "Song 19" … "Song 4".
+    expect(rows[1].startsWith("Song 19,")).toBe(true);
+    expect(rows[10].startsWith("Song 4,")).toBe(true);
   });
 
   it("is disabled when there are no rows", async () => {

@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { DEFAULT_SORT, nextSort } from "./sort.js";
 
 describe("nextSort", () => {
-  it("defaults to id ascending", () => {
-    expect(DEFAULT_SORT).toEqual({ sort: "id", order: "asc" });
+  it("defaults to title ascending", () => {
+    expect(DEFAULT_SORT).toEqual({ sort: "title", order: "asc" });
   });
   it("a new column starts ascending", () => {
     expect(nextSort({ sort: "id", order: "desc" }, "tempo")).toEqual({ sort: "tempo", order: "asc" });
