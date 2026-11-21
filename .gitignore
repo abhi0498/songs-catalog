@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 ratings.db
 ratings.db-*
+node_modules/
+dist/
