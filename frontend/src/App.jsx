@@ -5,6 +5,7 @@ import { DEFAULT_SORT, nextSort } from "./lib/sort.js";
 import Pagination from "./components/Pagination.jsx";
 import SearchPanel from "./components/SearchPanel.jsx";
 import SongTable from "./components/SongTable.jsx";
+import StarRating from "./components/StarRating.jsx";
 
 export default function App() {
   const [query, setQuery] = useState({ page: 1, ...DEFAULT_SORT });
@@ -43,13 +44,22 @@ export default function App() {
   };
   const onClearSearch = () => { searchSeq.current++; setSearch({ state: "idle" }); };
 
+  // R-RATE-3: put the API's updated song everywhere it's shown, without re-sorting (R-RATE-5).
+  const onRated = (updated) => {
+    const swap = (items) => items.map((s) => (s.id === updated.id ? updated : s));
+    setPageData((d) => (d ? { ...d, items: swap(d.items) } : d));
+    setSearch((s) => (s.state === "done" ? { ...s, result: { ...s.result, items: swap(s.result.items) } } : s));
+  };
+  const renderRating = (song) => <StarRating song={song} onRated={onRated} />;
+
   return (
     <main className="app">
       <header className="app-header">
         <h1>Songs</h1>
       </header>
 
-      <SearchPanel search={search} onSearch={onSearch} onClear={onClearSearch} />
+      <SearchPanel search={search} onSearch={onSearch} onClear={onClearSearch}
+                   renderRating={renderRating} />
 
       <div className="toolbar">
         <button type="button" onClick={onDownload} disabled={rows.length === 0}>
@@ -69,7 +79,8 @@ export default function App() {
           <>
             {pageData.items.length === 0
               ? <p className="muted">No songs</p>
-              : <SongTable rows={pageData.items} sortState={sortState} onSort={onSort} busy={loading} />}
+              : <SongTable rows={pageData.items} sortState={sortState} onSort={onSort}
+                           busy={loading} renderRating={renderRating} />}
             <Pagination page={pageData.page} totalPages={pageData.total_pages}
                         total={pageData.total} onPage={onPage} busy={loading} />
           </>
