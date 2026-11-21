@@ -1,1 +1,143 @@
-/* Filled in by later tasks. */
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --text: #1d1f24;
+  --muted: #5f6672;
+  --border: #dfe2e7;
+  --accent: #2456c7;
+  --accent-soft: #e8eefb;
+  --warn-bg: #fff6df;
+  --warn-text: #6b4a00;
+  --error-bg: #fdecec;
+  --error-text: #a01d1d;
+  --point: #7b8494;
+  --corrected: #d9480f;
+  --star: #e0a100;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.45;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: grid;
+  gap: 24px;
+}
+
+h1 { margin: 0; font-size: 1.6rem; }
+h2 { margin: 0 0 12px; font-size: 1.1rem; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  min-width: 0; /* lets the table wrapper scroll instead of the page */
+}
+
+button {
+  font: inherit;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+button.secondary { background: var(--surface); color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.muted { color: var(--muted); }
+.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* --- search --------------------------------------------------------------- */
+.search-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.search-form label { font-weight: 600; }
+.search-form input {
+  font: inherit;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  min-width: 0;
+  flex: 1 1 220px;
+}
+.search-status { margin: 12px 0 0; min-height: 1.45em; }
+.search-status:empty { display: none; }
+.search-status.info { color: var(--accent); }
+.search-status.warn { background: var(--warn-bg); color: var(--warn-text); padding: 6px 10px; border-radius: 6px; }
+.search-status.error { background: var(--error-bg); color: var(--error-text); padding: 6px 10px; border-radius: 6px; }
+.search .table-wrap { margin-top: 12px; }
+
+/* --- table ---------------------------------------------------------------- */
+.toolbar { display: flex; justify-content: flex-end; margin-bottom: -12px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.busy { opacity: 0.55; }
+th, td { padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+th.num, td.num { text-align: right; }
+th { background: var(--accent-soft); font-weight: 600; }
+button.sort {
+  background: none; border: 0; color: inherit; padding: 0; font-weight: 600;
+  width: 100%; text-align: inherit; /* the whole header cell is the click target */
+}
+.arrow { color: var(--accent); }
+tbody tr:hover { background: #fafbfc; }
+
+.null {
+  color: var(--muted);
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* --- pagination ----------------------------------------------------------- */
+.pagination {
+  display: flex; gap: 12px; align-items: center; justify-content: flex-end;
+  flex-wrap: wrap; margin-top: 12px;
+}
+
+/* --- stars ---------------------------------------------------------------- */
+.stars { display: inline-flex; align-items: center; gap: 6px; }
+button.star {
+  background: none; border: 0; padding: 0 1px; color: var(--muted);
+  font-size: 1.1rem; line-height: 1;
+}
+button.star.on { color: var(--star); }
+.rating-error { color: var(--error-text); font-size: 0.8rem; white-space: normal; max-width: 220px; }
+
+/* --- chart ---------------------------------------------------------------- */
+.chart { margin: 0; }
+.chart svg { width: 100%; height: auto; max-width: 760px; display: block; }
+.chart .grid { stroke: var(--border); }
+.chart .axis { stroke: var(--muted); }
+.chart text { font-size: 12px; fill: var(--muted); }
+.chart .axis-label { font-size: 13px; fill: var(--text); }
+.chart .pt { fill: var(--point); fill-opacity: 0.75; }
+.chart .pt.corrected { fill: var(--corrected); fill-opacity: 1; stroke: #fff; stroke-width: 1.5; }
+.chart g[tabindex="0"]:focus { outline: none; }
+.chart g[tabindex="0"]:focus .pt { stroke: var(--text); stroke-width: 2; }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 16px; padding: 0; margin: 8px 0; }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.swatch { display: inline-block; width: 12px; height: 12px; }
+.swatch.dot { border-radius: 50%; background: var(--point); }
+.swatch.diamond { background: var(--corrected); transform: rotate(45deg) scale(0.85); }
+figcaption { color: var(--muted); font-size: 0.9rem; max-width: 70ch; }
