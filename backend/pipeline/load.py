@@ -53,7 +53,10 @@ def load_file(path: Path | str) -> LoadedFile:
     if not allowed:
         raise PipelineError(f"{file}: unknown source file (expected one of the configured parts)")
 
-    data_bytes = path.read_bytes()
+    try:
+        data_bytes = path.read_bytes()
+    except OSError as e:
+        raise PipelineError(f"{file}: cannot read {path} ({e.strerror})") from e
     try:
         data = json.loads(data_bytes.decode("utf-8"), parse_constant=_keep_constant)
     except (UnicodeDecodeError, json.JSONDecodeError) as e:
